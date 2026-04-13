@@ -1,0 +1,10 @@
+name: cron-ai-mcp
+description: "MEOK AI Labs — Cron tools for AI agents and LLMs"
+vendor: MEOK AI Labs
+homepage: https://meok.ai
+repository: https://github.com/CSOAI-ORG/cron-ai-mcp
+license: MIT
+categories: [DevOps, Automation]
+tags: [cron, task-scheduling, cron-jobs, scheduled-tasks, automation]
+runtime: python
+entrypoint: server.py
