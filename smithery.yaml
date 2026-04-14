@@ -1,10 +1,50 @@
 name: cron-ai-mcp
-description: "MEOK AI Labs — Cron tools for AI agents and LLMs"
-vendor: MEOK AI Labs
-homepage: https://meok.ai
-repository: https://github.com/CSOAI-ORG/cron-ai-mcp
-license: MIT
-categories: [DevOps, Automation]
-tags: [cron, task-scheduling, cron-jobs, scheduled-tasks, automation]
-runtime: python
-entrypoint: server.py
+description: MCP server for cron expression tools.
+version: 1.0.0
+tools:
+- name: parse_cron
+  description: Parse a cron expression into its components with validation.
+  parameters:
+  - name: expression
+    type: string
+    required: true
+- name: generate_cron
+  description: 'Generate a cron expression. Use preset for common schedules: every_5min,
+    every_hour, daily_midnight, weekly_monday, monthly_first, weekdays_9am.'
+  parameters:
+  - name: minute
+    type: string
+    required: false
+  - name: hour
+    type: string
+    required: false
+  - name: day_of_month
+    type: string
+    required: false
+  - name: month
+    type: string
+    required: false
+  - name: day_of_week
+    type: string
+    required: false
+  - name: preset
+    type: string
+    required: false
+- name: next_runs
+  description: Calculate next N run times for a cron expression.
+  parameters:
+  - name: expression
+    type: string
+    required: true
+  - name: count
+    type: integer
+    required: false
+  - name: from_date
+    type: string
+    required: false
+- name: explain_cron
+  description: Explain a cron expression in human-readable English.
+  parameters:
+  - name: expression
+    type: string
+    required: true

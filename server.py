@@ -1,4 +1,9 @@
 """Cron AI MCP Server — Cron expression tools."""
+
+import sys, os
+sys.path.insert(0, os.path.expanduser('~/clawd/meok-labs-engine/shared'))
+from auth_middleware import check_access
+
 import time
 from datetime import datetime, timedelta
 from typing import Any
@@ -48,8 +53,12 @@ def _expand_field(field: str, min_val: int, max_val: int) -> list[int]:
     return sorted(v for v in values if min_val <= v <= max_val)
 
 @mcp.tool()
-def parse_cron(expression: str) -> dict[str, Any]:
+def parse_cron(expression: str, api_key: str = "") -> dict[str, Any]:
     """Parse a cron expression into its components with validation."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     if not _rate_check("parse_cron"):
         return {"error": "Rate limit exceeded (50/day)"}
     # Handle common aliases
@@ -71,8 +80,12 @@ def parse_cron(expression: str) -> dict[str, Any]:
     return {"expression": expression, "normalized": expr, "fields": fields, "is_valid": True}
 
 @mcp.tool()
-def generate_cron(minute: str = "*", hour: str = "*", day_of_month: str = "*", month: str = "*", day_of_week: str = "*", preset: str = "") -> dict[str, Any]:
+def generate_cron(minute: str = "*", hour: str = "*", day_of_month: str = "*", month: str = "*", day_of_week: str = "*", preset: str = "", api_key: str = "") -> dict[str, Any]:
     """Generate a cron expression. Use preset for common schedules: every_5min, every_hour, daily_midnight, weekly_monday, monthly_first, weekdays_9am."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     if not _rate_check("generate_cron"):
         return {"error": "Rate limit exceeded (50/day)"}
     presets = {
@@ -96,8 +109,12 @@ def generate_cron(minute: str = "*", hour: str = "*", day_of_month: str = "*", m
     return {"expression": expr, "fields": {"minute": minute, "hour": hour, "day_of_month": day_of_month, "month": month, "day_of_week": day_of_week}}
 
 @mcp.tool()
-def next_runs(expression: str, count: int = 5, from_date: str = "") -> dict[str, Any]:
+def next_runs(expression: str, count: int = 5, from_date: str = "", api_key: str = "") -> dict[str, Any]:
     """Calculate next N run times for a cron expression."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     if not _rate_check("next_runs"):
         return {"error": "Rate limit exceeded (50/day)"}
     if count < 1 or count > 50:
@@ -136,8 +153,12 @@ def next_runs(expression: str, count: int = 5, from_date: str = "") -> dict[str,
     return {"expression": expression, "next_runs": runs, "count": len(runs)}
 
 @mcp.tool()
-def explain_cron(expression: str) -> dict[str, Any]:
+def explain_cron(expression: str, api_key: str = "") -> dict[str, Any]:
     """Explain a cron expression in human-readable English."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     if not _rate_check("explain_cron"):
         return {"error": "Rate limit exceeded (50/day)"}
     aliases = {"@yearly": "0 0 1 1 *", "@annually": "0 0 1 1 *", "@monthly": "0 0 1 * *",

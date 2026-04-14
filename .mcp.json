@@ -1,23 +1,86 @@
 {
   "name": "cron-ai-mcp",
-  "description": "MEOK AI Labs \u2014 Cron tools for AI agents and LLMs",
-  "vendor": "MEOK AI Labs",
-  "homepage": "https://meok.ai",
-  "repository": "https://github.com/CSOAI-ORG/cron-ai-mcp",
-  "runtime": "python",
-  "entrypoint": "server.py",
+  "description": "MCP server for cron expression tools.",
+  "version": "1.0.0",
   "tools": [
-    "parse_cron",
-    "generate_cron",
-    "next_runs",
-    "explain_cron"
-  ],
-  "categories": [
-    "DevOps",
-    "Automation"
-  ],
-  "pricing": {
-    "free": "50 calls/day",
-    "pro": "$9/mo"
-  }
+    {
+      "name": "parse_cron",
+      "description": "Parse a cron expression into its components with validation.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "expression": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "expression"
+        ]
+      }
+    },
+    {
+      "name": "generate_cron",
+      "description": "Generate a cron expression. Use preset for common schedules: every_5min, every_hour, daily_midnight, weekly_monday, monthly_first, weekdays_9am.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "minute": {
+            "type": "string"
+          },
+          "hour": {
+            "type": "string"
+          },
+          "day_of_month": {
+            "type": "string"
+          },
+          "month": {
+            "type": "string"
+          },
+          "day_of_week": {
+            "type": "string"
+          },
+          "preset": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "next_runs",
+      "description": "Calculate next N run times for a cron expression.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "expression": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer"
+          },
+          "from_date": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "expression"
+        ]
+      }
+    },
+    {
+      "name": "explain_cron",
+      "description": "Explain a cron expression in human-readable English.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "expression": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "expression"
+        ]
+      }
+    }
+  ]
 }
