@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from typing import Any
 from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP("cron-ai-mcp")
+mcp = FastMCP("cron-ai", instructions="MEOK AI Labs MCP Server")
 _calls: dict[str, list[float]] = {}
 DAILY_LIMIT = 50
 

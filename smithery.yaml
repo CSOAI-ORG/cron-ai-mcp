@@ -1,5 +1,5 @@
 name: cron-ai-mcp
-description: MCP server for cron expression tools.
+description: MEOK AI Labs MCP Server
 version: 1.0.0
 tools:
 - name: parse_cron
