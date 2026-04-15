@@ -9,6 +9,18 @@ from datetime import datetime, timedelta
 from typing import Any
 from mcp.server.fastmcp import FastMCP
 
+import json
+from collections import defaultdict
+
+FREE_DAILY_LIMIT = 15
+_usage = defaultdict(list)
+def _rl(c="anon"):
+    now = datetime.now(timezone.utc)
+    _usage[c] = [t for t in _usage[c] if (now-t).total_seconds() < 86400]
+    if len(_usage[c]) >= FREE_DAILY_LIMIT: return json.dumps({"error": f"Limit {FREE_DAILY_LIMIT}/day"})
+    _usage[c].append(now); return None
+
+
 mcp = FastMCP("cron-ai", instructions="MEOK AI Labs MCP Server")
 _calls: dict[str, list[float]] = {}
 DAILY_LIMIT = 50
@@ -58,6 +70,7 @@ def parse_cron(expression: str, api_key: str = "") -> dict[str, Any]:
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+    if err := _rl(): return err
 
     if not _rate_check("parse_cron"):
         return {"error": "Rate limit exceeded (50/day)"}
@@ -85,6 +98,7 @@ def generate_cron(minute: str = "*", hour: str = "*", day_of_month: str = "*", m
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+    if err := _rl(): return err
 
     if not _rate_check("generate_cron"):
         return {"error": "Rate limit exceeded (50/day)"}
@@ -114,6 +128,7 @@ def next_runs(expression: str, count: int = 5, from_date: str = "", api_key: str
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+    if err := _rl(): return err
 
     if not _rate_check("next_runs"):
         return {"error": "Rate limit exceeded (50/day)"}
@@ -158,6 +173,7 @@ def explain_cron(expression: str, api_key: str = "") -> dict[str, Any]:
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+    if err := _rl(): return err
 
     if not _rate_check("explain_cron"):
         return {"error": "Rate limit exceeded (50/day)"}
