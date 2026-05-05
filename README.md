@@ -1,56 +1,38 @@
-# Cron AI MCP Server
+<div align="center">
 
-> By [MEOK AI Labs](https://meok.ai) — Cron expression parsing, generation, scheduling, and human-readable explanations
+[![GitHub stars](https://img.shields.io/github/stars/CSOAI-ORG/cron-ai-mcp)](https://github.com/CSOAI-ORG/cron-ai-mcp/stargazers)
+
+# ucronU aiU mcp
+
+****
+
+[![npm version](https://img.shields.io/npm/v/@meok-ai/cron-ai-mcp)](https://www.npmjs.com/package/@meok-ai/cron-ai-mcp)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![MEOK AI Labs](https://img.shields.io/badge/MEOK_AI_Labs-255+_servers-purple)](https://meok.ai)
+
+[Installation](#installation) · [Docs](https://csoai.org) · [Report Bug](https://github.com/CSOAI-ORG/cron-ai-mcp/issues)
+
+</div>
+
+---
 
 ## Installation
 
 ```bash
 pip install cron-ai-mcp
+# or
+npm install -g @meok-ai/cron-ai-mcp
 ```
 
-## Usage
+## Quick Start
 
-```bash
-python server.py
-```
+See the project repository for full documentation and examples.
 
-## Tools
+## Enterprise Support
 
-### `parse_cron`
-Parse a cron expression into its components with validation. Supports @yearly, @monthly, @daily aliases.
-
-**Parameters:**
-- `expression` (str): Cron expression (5 fields or alias)
-
-### `generate_cron`
-Generate a cron expression from individual fields or common presets.
-
-**Parameters:**
-- `minute` (str): Minute field (default '*')
-- `hour` (str): Hour field (default '*')
-- `day_of_month` (str): Day field (default '*')
-- `month` (str): Month field (default '*')
-- `day_of_week` (str): Day of week field (default '*')
-- `preset` (str): Preset — 'every_5min', 'every_hour', 'daily_midnight', 'weekly_monday', 'monthly_first', 'weekdays_9am', 'quarterly'
-
-### `next_runs`
-Calculate next N run times for a cron expression.
-
-**Parameters:**
-- `expression` (str): Cron expression
-- `count` (int): Number of runs (default 5, max 50)
-- `from_date` (str): Starting date
-
-### `explain_cron`
-Explain a cron expression in human-readable English with frequency estimates.
-
-**Parameters:**
-- `expression` (str): Cron expression
-
-## Authentication
-
-Free tier: 15 calls/day. Upgrade at [meok.ai/pricing](https://meok.ai/pricing) for unlimited access.
+- 📧 nicholas@csoai.org
+- 🌐 [CSOAI.org](https://csoai.org)
 
 ## License
 
-MIT — MEOK AI Labs
+MIT © [CSOAI](https://csoai.org)
