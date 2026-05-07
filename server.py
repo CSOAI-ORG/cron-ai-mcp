@@ -82,6 +82,11 @@ def parse_cron(expression: str, api_key: str = "") -> dict[str, Any]:
     When NOT to use:
         Not suitable for real-time production decision-making without
         human review of results.
+
+    Args:
+        expression (str): The expression to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -139,6 +144,16 @@ def generate_cron(minute: str = "*", hour: str = "*", day_of_month: str = "*", m
     When NOT to use:
         Not suitable for real-time production decision-making without
         human review of results.
+
+    Args:
+        minute (str): The minute to analyze or process.
+        hour (str): The hour to analyze or process.
+        day_of_month (str): The day of month to analyze or process.
+        month (str): The month to analyze or process.
+        day_of_week (str): The day of week to analyze or process.
+        preset (str): The preset to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -199,6 +214,13 @@ def next_runs(expression: str, count: int = 5, from_date: str = "", api_key: str
     When NOT to use:
         Not suitable for real-time production decision-making without
         human review of results.
+
+    Args:
+        expression (str): The expression to analyze or process.
+        count (int): The count to analyze or process.
+        from_date (str): The from date to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -274,6 +296,11 @@ def explain_cron(expression: str, api_key: str = "") -> dict[str, Any]:
     When NOT to use:
         Not suitable for real-time production decision-making without
         human review of results.
+
+    Args:
+        expression (str): The expression to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
