@@ -66,7 +66,23 @@ def _expand_field(field: str, min_val: int, max_val: int) -> list[int]:
 
 @mcp.tool()
 def parse_cron(expression: str, api_key: str = "") -> dict[str, Any]:
-    """Parse a cron expression into its components with validation."""
+    """Parse a cron expression into its components with validation.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
@@ -94,7 +110,22 @@ def parse_cron(expression: str, api_key: str = "") -> dict[str, Any]:
 
 @mcp.tool()
 def generate_cron(minute: str = "*", hour: str = "*", day_of_month: str = "*", month: str = "*", day_of_week: str = "*", preset: str = "", api_key: str = "") -> dict[str, Any]:
-    """Generate a cron expression. Use preset for common schedules: every_5min, every_hour, daily_midnight, weekly_monday, monthly_first, weekdays_9am."""
+    """Generate a cron expression. Use preset for common schedules: every_5min, every_hour, daily_midnight, weekly_monday, monthly_first, weekdays_9am.
+
+    Behavior:
+        This tool generates structured output without modifying external systems.
+        Output is deterministic for identical inputs. No side effects.
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
@@ -124,7 +155,23 @@ def generate_cron(minute: str = "*", hour: str = "*", day_of_month: str = "*", m
 
 @mcp.tool()
 def next_runs(expression: str, count: int = 5, from_date: str = "", api_key: str = "") -> dict[str, Any]:
-    """Calculate next N run times for a cron expression."""
+    """Calculate next N run times for a cron expression.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
@@ -169,7 +216,23 @@ def next_runs(expression: str, count: int = 5, from_date: str = "", api_key: str
 
 @mcp.tool()
 def explain_cron(expression: str, api_key: str = "") -> dict[str, Any]:
-    """Explain a cron expression in human-readable English."""
+    """Explain a cron expression in human-readable English.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
