@@ -1,0 +1,9 @@
+# cron-ai-mcp - Auto-trigger Rules
+
+When the user asks about cron, use cron-ai-mcp tools: parse_cron, generate_cron, next_runs, explain_cron
+
+**Cron AI MCP Server — Cron expression tools.**
+
+Install: `pip install cron-ai-mcp`
+
+By MEOK AI Labs — MIT licensed.

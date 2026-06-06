@@ -1,0 +1,25 @@
+{
+  "name": "cron-ai-mcp",
+  "title": "Cron Ai Mcp",
+  "description": "AI-powered cron ai MCP server for agents. Supports parse cron, generate cron, next runs. By MEOK AI Labs.",
+  "version": "1.0.6",
+  "homepage": "https://meok.ai",
+  "license": "MIT",
+  "transport": {
+    "type": "stdio"
+  },
+  "tools": [
+    {
+      "name": "parse_cron"
+    },
+    {
+      "name": "generate_cron"
+    },
+    {
+      "name": "next_runs"
+    },
+    {
+      "name": "explain_cron"
+    }
+  ]
+}

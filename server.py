@@ -1,7 +1,7 @@
-"""Cron AI MCP Server — Cron expression tools."""
+"""
+Cron AI MCP Server — Cron expression tools."""
 
 import sys, os
-sys.path.insert(0, os.path.expanduser('~/clawd/meok-labs-engine/shared'))
 from auth_middleware import check_access
 
 import time
@@ -12,27 +12,7 @@ from mcp.server.fastmcp import FastMCP
 import json
 from collections import defaultdict
 
-FREE_DAILY_LIMIT = 15
-_usage = defaultdict(list)
-def _rl(c="anon"):
-    now = datetime.now(timezone.utc)
-    _usage[c] = [t for t in _usage[c] if (now-t).total_seconds() < 86400]
-    if len(_usage[c]) >= FREE_DAILY_LIMIT: return json.dumps({"error": f"Limit {FREE_DAILY_LIMIT}/day"})
-    _usage[c].append(now); return None
-
-
 mcp = FastMCP("cron-ai", instructions="MEOK AI Labs MCP Server")
-_calls: dict[str, list[float]] = {}
-DAILY_LIMIT = 50
-
-def _rate_check(tool: str) -> bool:
-    now = time.time()
-    _calls.setdefault(tool, [])
-    _calls[tool] = [t for t in _calls[tool] if t > now - 86400]
-    if len(_calls[tool]) >= DAILY_LIMIT:
-        return False
-    _calls[tool].append(now)
-    return True
 
 FIELD_NAMES = ["minute", "hour", "day_of_month", "month", "day_of_week"]
 MONTH_NAMES = {1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
@@ -104,11 +84,8 @@ def parse_cron(expression: str, api_key: str = "") -> dict[str, Any]:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
-    if err := _rl(): return err
+        return {"error": msg, "upgrade_url": "https://councilof.ai"}
 
-    if not _rate_check("parse_cron"):
-        return {"error": "Rate limit exceeded (50/day)"}
     # Handle common aliases
     aliases = {"@yearly": "0 0 1 1 *", "@annually": "0 0 1 1 *", "@monthly": "0 0 1 * *",
                "@weekly": "0 0 * * 0", "@daily": "0 0 * * *", "@midnight": "0 0 * * *",
@@ -171,11 +148,8 @@ def generate_cron(minute: str = "*", hour: str = "*", day_of_month: str = "*", m
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
-    if err := _rl(): return err
+        return {"error": msg, "upgrade_url": "https://councilof.ai"}
 
-    if not _rate_check("generate_cron"):
-        return {"error": "Rate limit exceeded (50/day)"}
     presets = {
         "every_5min": ("*/5", "*", "*", "*", "*", "Every 5 minutes"),
         "every_15min": ("*/15", "*", "*", "*", "*", "Every 15 minutes"),
@@ -238,11 +212,8 @@ def next_runs(expression: str, count: int = 5, from_date: str = "", api_key: str
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
-    if err := _rl(): return err
+        return {"error": msg, "upgrade_url": "https://councilof.ai"}
 
-    if not _rate_check("next_runs"):
-        return {"error": "Rate limit exceeded (50/day)"}
     if count < 1 or count > 50:
         return {"error": "Count must be 1-50"}
     aliases = {"@yearly": "0 0 1 1 *", "@annually": "0 0 1 1 *", "@monthly": "0 0 1 * *",
@@ -318,11 +289,8 @@ def explain_cron(expression: str, api_key: str = "") -> dict[str, Any]:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
-    if err := _rl(): return err
+        return {"error": msg, "upgrade_url": "https://councilof.ai"}
 
-    if not _rate_check("explain_cron"):
-        return {"error": "Rate limit exceeded (50/day)"}
     aliases = {"@yearly": "0 0 1 1 *", "@annually": "0 0 1 1 *", "@monthly": "0 0 1 * *",
                "@weekly": "0 0 * * 0", "@daily": "0 0 * * *", "@hourly": "0 * * * *"}
     expr = aliases.get(expression.lower(), expression)
@@ -368,5 +336,8 @@ def explain_cron(expression: str, api_key: str = "") -> dict[str, Any]:
         per_day = per_month = 0
     return {"expression": expression, "human_readable": human, "parts": descriptions, "estimated_runs_per_day": per_day, "estimated_runs_per_month": per_month}
 
-if __name__ == "__main__":
+def main():
     mcp.run()
+
+if __name__ == '__main__':
+    main()

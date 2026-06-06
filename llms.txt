@@ -1,0 +1,33 @@
+# cron-ai-mcp
+# **Cron AI MCP Server — Cron expression tools.**
+
+## Install
+```bash
+pip install cron-ai-mcp
+```
+
+## Auth & Rate Limits
+- Free tier: 10 calls/day. No API key required.
+- Pro tier (£79/mo): unlimited + signed attestations.
+- Enterprise (£1,499/mo): white-label.
+
+## Tools
+
+### `parse_cron`
+Parse a cron expression into its components with validation.
+
+### `generate_cron`
+Generate a cron expression. Use preset for common schedules: every_5min, every_hour, daily_midnight, weekly_monday, monthly_first, weekdays_9am.
+
+### `next_runs`
+Calculate next N run times for a cron expression.
+
+### `explain_cron`
+Explain a cron expression in human-readable English.
+
+
+## Maintainer
+MEOK AI Labs · hello@meok.ai · https://meok.ai · MIT licensed
+
+## Pairs with
+Governance moat: pair this tool with any of MEOK's 38 governance MCPs (EU AI Act, DORA, NIS2, CRA, GDPR, ISO 42001, etc.) for full compliance coverage.
