@@ -1,0 +1,22 @@
+{
+  "acpVersion": "0.1",
+  "agent": {
+    "name": "cron-ai-mcp",
+    "description": "Cron Ai MCP Server by MEOK AI Labs",
+    "version": "1.0.6",
+    "provider": "MEOK AI Labs",
+    "interfaces": [
+      {
+        "type": "mcp",
+        "transport": "stdio",
+        "package": "cron-ai-mcp"
+      }
+    ],
+    "capabilities": [
+      "parse_cron",
+      "generate_cron",
+      "next_runs",
+      "explain_cron"
+    ]
+  }
+}

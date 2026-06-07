@@ -1,0 +1,59 @@
+{
+  "name": "cron-ai-mcp",
+  "description": "Cron Ai MCP Server by MEOK AI Labs",
+  "url": "https://proofof.ai/scorecard/cron-ai-mcp.html",
+  "version": "1.0.6",
+  "protocolVersion": "0.2.0",
+  "provider": {
+    "organization": "MEOK AI Labs",
+    "url": "https://meok.ai"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text"
+  ],
+  "defaultOutputModes": [
+    "text"
+  ],
+  "skills": [
+    {
+      "id": "parse_cron",
+      "name": "Parse Cron",
+      "description": "parse_cron via cron-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "generate_cron",
+      "name": "Generate Cron",
+      "description": "generate_cron via cron-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "next_runs",
+      "name": "Next Runs",
+      "description": "next_runs via cron-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "explain_cron",
+      "name": "Explain Cron",
+      "description": "explain_cron via cron-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    }
+  ]
+}
