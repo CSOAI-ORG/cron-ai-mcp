@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 [project]
 name = "cron-ai-mcp"
-version = "1.0.6"
+version = "1.0.8"
 readme = "README.md"
 description = "AI-powered cron ai MCP server for agents. Supports parse cron, generate cron, next runs. By MEOK AI Labs."
 license = {file = "LICENSE"}
